@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'profiles_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'user.sqlite3'),
     }
 }
 
@@ -122,4 +122,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'profiles_api.UserProfile'
+AUTH_USER_MODEL = 'profiles_api.User'
