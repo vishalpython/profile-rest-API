@@ -1,5 +1,6 @@
 from django.db import models
 from passlib.hash import pbkdf2_sha256
+from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import (
 AbstractBaseUser,BaseUserManager
 )
@@ -14,17 +15,23 @@ class UserManager(BaseUserManager):
             raise ValueError("User must have password")
         if not full_name:
             raise ValueError("Full name must be there")
+        if not phone:
+            raise ValueError("Phone number must be there")
         user_obj=self.model(
             email=self.normalize_email(email),
             full_name=full_name,
             phone=phone,
+
         )
         #hash = pbkdf2_sha256.encrypt(password, rounds=200000, salt_size=16)
+
+
 
         user_obj.set_password(password)
         user_obj.staff=is_staff
         user_obj.admin=is_admin
         user_obj.active=is_active
+
         user_obj.save(using=self.db)
         return user_obj
 
